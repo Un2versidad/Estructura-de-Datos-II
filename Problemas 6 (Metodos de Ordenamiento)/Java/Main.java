@@ -107,8 +107,8 @@ public class Main {
                 long t3 = System.nanoTime();
                 System.out.println("\n=== Comparación de Algoritmos ===");
                 System.out.println("Vector original: " + Arrays.toString(arr));
-                System.out.printf("Burbuja: %d iteraciones, %.6f segundos\n", bubbleSteps.size() - 1, (t2 - t1) / 1e9);
-                System.out.printf("Selección: %d iteraciones, %.6f segundos\n", selectionSteps.size() - 1, (t3 - t2) / 1e9);
+                System.out.printf("Burbuja: %d iteraciones, %.3f milisegundos\n", bubbleSteps.size() - 1, (t2 - t1) / 1e6);
+                System.out.printf("Selección: %d iteraciones, %.3f milisegundos\n", selectionSteps.size() - 1, (t3 - t2) / 1e6);
                 if ((t2 - t1) < (t3 - t2)) {
                     System.out.println("El algoritmo de burbuja fue más rápido para este vector.");
                 } else if ((t3 - t2) < (t2 - t1)) {
