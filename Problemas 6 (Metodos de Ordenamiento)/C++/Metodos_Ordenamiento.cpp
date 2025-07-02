@@ -4,6 +4,7 @@
 #include <sstream>
 #include <chrono>
 #include <iomanip>
+#include <locale.h>
 
 using namespace std;
 
@@ -31,7 +32,7 @@ vector<string> bubbleSortSteps(const vector<int>& arr) {
             }
         }
         ostringstream oss2;
-        oss2 << "Iteraci髇 " << iter << ": [";
+        oss2 << "Iteraci贸n " << iter << ": [";
         for (size_t i = 0; i < a.size(); ++i) {
             oss2 << a[i];
             if (i + 1 < a.size()) oss2 << ", ";
@@ -65,7 +66,7 @@ vector<string> selectionSortSteps(const vector<int>& arr) {
             swap(a[i], a[minIdx]);
         }
         ostringstream oss2;
-        oss2 << "Iteraci髇 " << (i + 1) << ": [";
+        oss2 << "Iteraci贸n " << (i + 1) << ": [";
         for (size_t k = 0; k < a.size(); ++k) {
             oss2 << a[k];
             if (k + 1 < a.size()) oss2 << ", ";
@@ -78,7 +79,7 @@ vector<string> selectionSortSteps(const vector<int>& arr) {
 
 vector<int> getUserArray() {
     while (true) {
-        cout << "Ingrese los n鷐eros separados por espacio: ";
+        cout << "Ingrese los n煤meros separados por espacio: ";
         string line;
         getline(cin, line);
         istringstream iss(line);
@@ -92,7 +93,7 @@ vector<int> getUserArray() {
             return arr;
         }
         else {
-            cout << "Error: Ingrese solo n鷐eros enteros v醠idos." << endl;
+            cout << "Error: Ingrese solo n煤meros enteros v谩lidos." << endl;
         }
     }
 }
@@ -105,13 +106,14 @@ void printSteps(const vector<string>& steps, const string& title) {
 }
 
 int main() {
+    setlocale(LC_ALL, "Spanish");
     while (true) {
         cout << "\n===== ALGORITMOS DE ORDENAMIENTO =====" << endl;
         cout << "1. Ordenamiento de Burbuja" << endl;
-        cout << "2. Ordenamiento por Selecci髇" << endl;
+        cout << "2. Ordenamiento por Selecci贸n" << endl;
         cout << "3. Comparar ambos algoritmos" << endl;
         cout << "4. Salir" << endl;
-        cout << "Seleccione una opci髇: ";
+        cout << "Seleccione una opci贸n: ";
         string opStr;
         getline(cin, opStr);
         int opcion;
@@ -119,11 +121,11 @@ int main() {
             opcion = stoi(opStr);
         }
         catch (...) {
-            cout << "Error: Ingrese un n鷐ero entero v醠ido." << endl;
+            cout << "Error: Ingrese un n煤mero entero v谩lido." << endl;
             continue;
         }
         if (opcion == 4) {
-            cout << "Saliendo del programa. asta pronto!" << endl;
+            cout << "Saliendo del programa. 隆Hasta pronto!" << endl;
             break;
         }
         vector<int> arr = getUserArray();
@@ -133,9 +135,9 @@ int main() {
             printSteps(steps, "Ordenamiento de Burbuja");
         }
         else if (opcion == 2) {
-            cout << "\nOrdenando con algoritmo de selecci髇..." << endl;
+            cout << "\nOrdenando con algoritmo de selecci贸n..." << endl;
             vector<string> steps = selectionSortSteps(arr);
-            printSteps(steps, "Ordenamiento por Selecci髇");
+            printSteps(steps, "Ordenamiento por Selecci贸n");
         }
         else if (opcion == 3) {
             cout << "\nComparando ambos algoritmos..." << endl;
@@ -144,30 +146,30 @@ int main() {
             auto t2 = chrono::high_resolution_clock::now();
             vector<string> selectionSteps = selectionSortSteps(arr);
             auto t3 = chrono::high_resolution_clock::now();
-            cout << "\n=== Comparaci髇 de Algoritmos ===" << endl;
+            cout << "\n=== Comparaci贸n de Algoritmos ===" << endl;
             cout << "Vector original: [";
             for (size_t i = 0; i < arr.size(); ++i) {
                 cout << arr[i];
                 if (i + 1 < arr.size()) cout << ", ";
             }
             cout << "]" << endl;
-            double bubbleTime = chrono::duration<double>(t2 - t1).count();
-            double selectionTime = chrono::duration<double>(t3 - t2).count();
-            cout << fixed << setprecision(6);
-            cout << "Burbuja: " << (bubbleSteps.size() - 1) << " iteraciones, " << bubbleTime << " segundos" << endl;
-            cout << "Selecci髇: " << (selectionSteps.size() - 1) << " iteraciones, " << selectionTime << " segundos" << endl;
+            double bubbleTime = chrono::duration<double, std::milli>(t2 - t1).count();
+            double selectionTime = chrono::duration<double, std::milli>(t3 - t2).count();
+            cout << fixed << setprecision(3);
+            cout << "Burbuja: " << (bubbleSteps.size() - 1) << " iteraciones, " << bubbleTime << " ms" << endl;
+            cout << "Selecci贸n: " << (selectionSteps.size() - 1) << " iteraciones, " << selectionTime << " ms" << endl;
             if (bubbleTime < selectionTime) {
-                cout << "El algoritmo de burbuja fue m醩 r醦ido para este vector." << endl;
+                cout << "El algoritmo de burbuja fue m谩s r谩pido para este vector." << endl;
             }
             else if (selectionTime < bubbleTime) {
-                cout << "El algoritmo de selecci髇 fue m醩 r醦ido para este vector." << endl;
+                cout << "El algoritmo de selecci贸n fue m谩s r谩pido para este vector." << endl;
             }
             else {
                 cout << "Ambos algoritmos tomaron el mismo tiempo." << endl;
             }
         }
         else {
-            cout << "Opci髇 no v醠ida. Intente de nuevo." << endl;
+            cout << "Opci贸n no v谩lida. Intente de nuevo." << endl;
         }
         cout << "\nPresione Enter para continuar...";
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
