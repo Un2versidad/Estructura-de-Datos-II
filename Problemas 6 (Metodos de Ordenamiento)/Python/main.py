@@ -1,161 +1,126 @@
-# Realice los programas de ordenamiento de burbuja y de Selección en los lenguajes C++, Java y Python, muestre la impresión de pantalla para cada uno de ellos.
-# En que se diferencia y en que se asemejan cada uno de los métodos?
+import java.util.*;
 
-import time
-from colorama import init, Fore, Style
-from tabulate import tabulate
+public class Main {
+    static List<String> bubbleSortSteps(int[] arr) {
+        int[] a = arr.clone();
+        List<String> steps = new ArrayList<>();
+        steps.add("Inicial: " + Arrays.toString(a));
+        boolean permutation = true;
+        int iter = 0;
+        while (permutation) {
+            permutation = false;
+            iter++;
+            for (int i = 0; i < a.length - iter; i++) {
+                if (a[i] > a[i + 1]) {
+                    int temp = a[i];
+                    a[i] = a[i + 1];
+                    a[i + 1] = temp;
+                    permutation = true;
+                }
+            }
+            steps.add("Iteración " + iter + ": " + Arrays.toString(a));
+        }
+        return steps;
+    }
 
-init(autoreset=True)
+    static List<String> selectionSortSteps(int[] arr) {
+        int[] a = arr.clone();
+        List<String> steps = new ArrayList<>();
+        steps.add("Inicial: " + Arrays.toString(a));
+        for (int i = 0; i < a.length; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j < a.length; j++) {
+                if (a[j] < a[minIdx]) {
+                    minIdx = j;
+                }
+            }
+            if (minIdx != i) {
+                int temp = a[i];
+                a[i] = a[minIdx];
+                a[minIdx] = temp;
+            }
+            steps.add("Iteración " + (i + 1) + ": " + Arrays.toString(a));
+        }
+        return steps;
+    }
 
-def bubble_sort(vector):
-    """Implementación del algoritmo de ordenamiento burbuja."""
-    vector_copy = vector.copy()
-    permutation = True
-    iteracion = 0
-    steps = [["Inicial", vector_copy.copy()]]
+    static int[] getUserArray(Scanner scanner) {
+        while (true) {
+            System.out.print("Ingrese los números separados por espacio: ");
+            String line = scanner.nextLine();
+            String[] parts = line.trim().split("\\s+");
+            try {
+                int[] arr = new int[parts.length];
+                for (int i = 0; i < parts.length; i++) {
+                    arr[i] = Integer.parseInt(parts[i]);
+                }
+                return arr;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese solo números enteros válidos.");
+            }
+        }
+    }
 
-    while permutation:
-        permutation = False
-        iteracion = iteracion + 1
-        for actual in range(0, len(vector_copy) - iteracion):
-            if vector_copy[actual] > vector_copy[actual + 1]:
-                permutation = True
-                # Intercambiamos los dos elementos
-                vector_copy[actual], vector_copy[actual + 1] = vector_copy[actual + 1], vector_copy[actual]
-        steps.append([f"Iteración {iteracion}", vector_copy.copy()])
+    static void printSteps(List<String> steps, String title) {
+        System.out.println("\n=== Pasos del " + title + " ===");
+        for (String step : steps) {
+            System.out.println(step);
+        }
+    }
 
-    return vector_copy, steps
-
-
-def selection_sort(vector):
-    """Implementación del algoritmo de ordenamiento por selección."""
-    vector_copy = vector.copy()
-    nb = len(vector_copy)
-    steps = [["Inicial", vector_copy.copy()]]
-
-    for actual in range(0, nb):
-        mas_pequeno = actual
-        for j in range(actual + 1, nb):
-            if vector_copy[j] < vector_copy[mas_pequeno]:
-                mas_pequeno = j
-        if mas_pequeno != actual:  # Corregido de "min is not actual"
-            temp = vector_copy[actual]
-            vector_copy[actual] = vector_copy[mas_pequeno]
-            vector_copy[mas_pequeno] = temp
-        steps.append([f"Iteración {actual + 1}", vector_copy.copy()])
-
-    return vector_copy, steps
-
-
-def get_valid_vector():
-    """Solicita al usuario ingresar un vector válido de números."""
-    while True:
-        try:
-            input_str = input(f"{Fore.CYAN}Ingrese los números separados por espacio: {Style.RESET_ALL}")
-            vector = list(map(int, input_str.split()))
-            if not vector:
-                print(f"{Fore.RED}Error: Debe ingresar al menos un número.{Style.RESET_ALL}")
-                continue
-            return vector
-        except ValueError:
-            print(f"{Fore.RED}Error: Ingrese solo números enteros válidos.{Style.RESET_ALL}")
-
-
-def press_to_continue():
-    """Pausa el programa hasta que el usuario presione Enter."""
-    input(f"\n{Fore.YELLOW}Presione Enter para continuar...{Style.RESET_ALL}")
-
-
-def display_results(original, sorted_vector, steps, algorithm_name):
-    """Muestra los resultados del ordenamiento en formato tabular."""
-    print(f"\n{Fore.GREEN}=== Resultados del {algorithm_name} ==={Style.RESET_ALL}")
-    print(f"{Fore.YELLOW}Vector original: {Style.RESET_ALL}{original}")
-    print(f"{Fore.YELLOW}Vector ordenado: {Style.RESET_ALL}{sorted_vector}")
-
-    print(f"\n{Fore.CYAN}Pasos del algoritmo:{Style.RESET_ALL}")
-    print(tabulate(steps, headers=["Paso", "Estado del vector"], tablefmt="grid"))
-
-
-def menu():
-    """Muestra un menú interactivo para seleccionar el algoritmo de ordenamiento."""
-    while True:
-        print(f"\n{Fore.MAGENTA}{'=' * 40}{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}{'ALGORITMOS DE ORDENAMIENTO':^40}{Style.RESET_ALL}")
-        print(f"{Fore.MAGENTA}{'=' * 40}{Style.RESET_ALL}")
-        print(f"{Fore.YELLOW}1.{Style.RESET_ALL} Ordenamiento de Burbuja")
-        print(f"{Fore.YELLOW}2.{Style.RESET_ALL} Ordenamiento por Selección")
-        print(f"{Fore.YELLOW}3.{Style.RESET_ALL} Comparar ambos algoritmos")
-        print(f"{Fore.YELLOW}4.{Style.RESET_ALL} Salir")
-        print(f"{Fore.MAGENTA}{'-' * 40}{Style.RESET_ALL}")
-
-        try:
-            opcion = int(input(f"{Fore.CYAN}Seleccione una opción: {Style.RESET_ALL}"))
-
-            if opcion == 1:
-                vector = get_valid_vector()
-                print(f"{Fore.GREEN}Ordenando con algoritmo de burbuja...{Style.RESET_ALL}")
-                sorted_vector, steps = bubble_sort(vector)
-                display_results(vector, sorted_vector, steps, "Ordenamiento de Burbuja")
-                press_to_continue()
-
-            elif opcion == 2:
-                vector = get_valid_vector()
-                print(f"{Fore.GREEN}Ordenando con algoritmo de selección...{Style.RESET_ALL}")
-                sorted_vector, steps = selection_sort(vector)
-                display_results(vector, sorted_vector, steps, "Ordenamiento por Selección")
-                press_to_continue()
-
-            elif opcion == 3:
-                vector = get_valid_vector()
-                print(f"{Fore.GREEN}Comparando ambos algoritmos...{Style.RESET_ALL}")
-
-                # Medir tiempo para bubble sort
-                start_time = time.time()
-                bubble_sorted, bubble_steps = bubble_sort(vector)
-                bubble_time = time.time() - start_time
-
-                # Medir tiempo para selection sort
-                start_time = time.time()
-                selection_sorted, selection_steps = selection_sort(vector)
-                selection_time = time.time() - start_time
-
-                # Mostrar resultados
-                print(f"\n{Fore.GREEN}=== Comparación de Algoritmos ==={Style.RESET_ALL}")
-                print(f"{Fore.YELLOW}Vector original: {Style.RESET_ALL}{vector}")
-
-                comparison = [
-                    ["Burbuja", len(bubble_steps) - 1, f"{bubble_time:.6f} segundos"],
-                    ["Selección", len(selection_steps) - 1, f"{selection_time:.6f} segundos"]
-                ]
-
-                print(tabulate(comparison,headers=["Algoritmo", "Iteraciones", "Tiempo de ejecución"], tablefmt="grid"))
-
-                if bubble_time < selection_time:
-                    print(f"{Fore.GREEN}El algoritmo de burbuja fue más rápido para este vector.{Style.RESET_ALL}")
-                elif selection_time < bubble_time:
-                    print(f"{Fore.GREEN}El algoritmo de selección fue más rápido para este vector.{Style.RESET_ALL}")
-                else:
-                    print(f"{Fore.GREEN}Ambos algoritmos tomaron el mismo tiempo.{Style.RESET_ALL}")
-
-                press_to_continue()
-
-            elif opcion == 4:
-                print(f"{Fore.GREEN}Saliendo del programa. ¡Hasta pronto!{Style.RESET_ALL}")
-                break
-
-            else:
-                print(f"{Fore.RED}Opción no válida. Intente de nuevo.{Style.RESET_ALL}")
-                press_to_continue()
-
-        except ValueError:
-            print(f"{Fore.RED}Error: Ingrese un número entero válido.{Style.RESET_ALL}")
-            press_to_continue()
-
-
-if __name__ == "__main__":
-    try:
-        menu()
-    except KeyboardInterrupt:
-        print(f"\n{Fore.RED}Programa interrumpido por el usuario.{Style.RESET_ALL}")
-    except Exception as e:
-        print(f"\n{Fore.RED}Error inesperado: {e}{Style.RESET_ALL}")
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("\n===== ALGORITMOS DE ORDENAMIENTO =====");
+            System.out.println("1. Ordenamiento de Burbuja");
+            System.out.println("2. Ordenamiento por Selección");
+            System.out.println("3. Comparar ambos algoritmos");
+            System.out.println("4. Salir");
+            System.out.print("Seleccione una opción: ");
+            String opStr = scanner.nextLine();
+            int opcion;
+            try {
+                opcion = Integer.parseInt(opStr);
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un número entero válido.");
+                continue;
+            }
+            if (opcion == 4) {
+                System.out.println("Saliendo del programa. ¡Hasta pronto!");
+                break;
+            }
+            int[] arr = getUserArray(scanner);
+            if (opcion == 1) {
+                System.out.println("\nOrdenando con algoritmo de burbuja...");
+                List<String> steps = bubbleSortSteps(arr);
+                printSteps(steps, "Ordenamiento de Burbuja");
+            } else if (opcion == 2) {
+                System.out.println("\nOrdenando con algoritmo de selección...");
+                List<String> steps = selectionSortSteps(arr);
+                printSteps(steps, "Ordenamiento por Selección");
+            } else if (opcion == 3) {
+                System.out.println("\nComparando ambos algoritmos...");
+                long t1 = System.nanoTime();
+                List<String> bubbleSteps = bubbleSortSteps(arr);
+                long t2 = System.nanoTime();
+                List<String> selectionSteps = selectionSortSteps(arr);
+                long t3 = System.nanoTime();
+                System.out.println("\n=== Comparación de Algoritmos ===");
+                System.out.println("Vector original: " + Arrays.toString(arr));
+                System.out.printf("Burbuja: %d iteraciones, %.3f milisegundos\n", bubbleSteps.size() - 1, (t2 - t1) / 1e6);
+                System.out.printf("Selección: %d iteraciones, %.3f milisegundos\n", selectionSteps.size() - 1, (t3 - t2) / 1e6);
+                if ((t2 - t1) < (t3 - t2)) {
+                    System.out.println("El algoritmo de burbuja fue más rápido para este vector.");
+                } else if ((t3 - t2) < (t2 - t1)) {
+                    System.out.println("El algoritmo de selección fue más rápido para este vector.");
+                } else {
+                    System.out.println("Ambos algoritmos tomaron el mismo tiempo.");
+                }
+            } else {
+                System.out.println("Opción no válida. Intente de nuevo.");
+            }
+            System.out.println("\nPresione Enter para continuar...");
+            scanner.nextLine();
+        }
+    }
+}
