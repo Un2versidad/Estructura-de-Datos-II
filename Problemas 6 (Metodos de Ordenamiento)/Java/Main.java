@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class Main {
-    // Bubble Sort with step tracking
     static List<String> bubbleSortSteps(int[] arr) {
         int[] a = arr.clone();
         List<String> steps = new ArrayList<>();
@@ -24,7 +23,6 @@ public class Main {
         return steps;
     }
 
-    // Selection Sort with step tracking
     static List<String> selectionSortSteps(int[] arr) {
         int[] a = arr.clone();
         List<String> steps = new ArrayList<>();
