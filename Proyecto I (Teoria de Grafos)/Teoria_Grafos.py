@@ -137,7 +137,6 @@ class GrafoMenu:
             print(f"No existe camino entre {source} y {target}.")
             return -1, []
 
-
 def main():
     grafo_menu = GrafoMenu()
 
