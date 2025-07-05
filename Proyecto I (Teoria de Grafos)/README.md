@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/5ea6b33b-2103-46ae-b81d-0afd63ed0231)
+
 # Menu de Grafos - Ejemplo de uso
 
 Este programa implementa un menú interactivo en consola para trabajar con grafos, permitiendo:
