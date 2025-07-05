@@ -131,20 +131,7 @@ Camino: B -> A
 
 ---
 
-### ✅ Visualizar grafo
-
-```
-Seleccione una opción: 7
-
---- VISUALIZAR GRAFO ---
-Se guardará la imagen en la carpeta 'graph_output' y se abrirá automáticamente.
-Imagen guardada en: C:\Users\fl2on\PycharmProjects\PythonProject28\graph_output\graph_visualization.png
-Abriendo visualización del grafo...
-```
-
----
-
-### ✅ Seguir añadiendo arcos y visualizar nuevamente
+### ✅ Seguir añadiendo arcos y visualizar grafo
 
 ```
 Seleccione una opción: 2
