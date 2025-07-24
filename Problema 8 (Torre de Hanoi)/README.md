@@ -2,7 +2,7 @@
 
 # 🎮 **Estructuras de Datos II - UIP** 🧠
 
-[![License](https://img.shields.io/badge/License-MIT-blue)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/Un2versidad/Estructura-de-Datos-II/blob/main/LICENSE)
 
 
 ## 📑 **Índice**
