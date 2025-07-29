@@ -8,7 +8,7 @@ import os
 
 def generar_pdf_productos(productos, archivo="productos_completos.pdf", logo_path=None):
     """
-    Genera un PDF con la lista completa de productos con diseño mejorado.
+    Genera un PDF con la lista completa de productos.
 
     Args:
         productos: Lista de objetos Producto
