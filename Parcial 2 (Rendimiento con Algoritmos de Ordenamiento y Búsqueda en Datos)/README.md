@@ -663,5 +663,5 @@ def visualizar_comparacion_metodos_busqueda(resultados_existentes, resultados_no
 <hr>
 <p align="center">
   <i>Hecho con ❤️ en Python.<br>
-  Para el código completo y documentación, revisa los archivos y carpetas del repositorio.</i>
+  Para el código completo y la documentación, revisa los archivos y carpetas del repositorio.</i>
 </p>
