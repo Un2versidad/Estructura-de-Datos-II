@@ -26,13 +26,13 @@
 </details>
 
 <!-- ACERCA -->
-<h2 id="acerca">📦 Acerca del Proyecto</h2>
+<h2>📦 Acerca del Proyecto</h2>
 <p>
 Este proyecto simula el sistema de gestión de productos de una tienda online, enfocándose en el rendimiento de algoritmos de ordenamiento y búsqueda. Genera datos realistas, mide y compara algoritmos, y visualiza los resultados.
 </p>
 
 <!-- CARACTERISTICAS -->
-<h2 id="caracteristicas">✨ Características</h2>
+<h2>✨ Características</h2>
 <ul>
   <li>🛍️ Generación realista de productos con <code>Faker</code></li>
   <li>⚡ Ordenamiento eficiente: Merge Sort, Quick Sort, Insertion Sort</li>
@@ -42,7 +42,7 @@ Este proyecto simula el sistema de gestión de productos de una tienda online, e
 </ul>
 
 <!-- CAPTURAS -->
-<h2 id="capturas">🖼️ Capturas de Pantalla</h2>
+<h2>🖼️ Capturas de Pantalla</h2>
 <p align="center">
   <img src="comparacion_metodos_busqueda.png" width="80%" alt="Comparación de Métodos de Búsqueda por Nombre">
   <br>
@@ -52,7 +52,7 @@ Este proyecto simula el sistema de gestión de productos de una tienda online, e
 </p>
 
 <!-- USO -->
-<h2 id="uso">🚀 Uso</h2>
+<h2>🚀 Uso</h2>
 
 ```bash
 # 🧰 Instala las dependencias
