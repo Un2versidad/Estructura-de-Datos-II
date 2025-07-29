@@ -63,7 +63,7 @@ python main.py
 ```
 
 <!-- CODIGO -->
-<h2 id="codigo">🧩 Código Completo</h2>
+<h2>🧩 Código Completo</h2>
 
 <details>
 <summary><b>📦 Clase Producto y Generador de Datos</b></summary>
